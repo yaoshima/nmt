@@ -33,8 +33,10 @@ def pad_sents(sents, pad_token):
     longest_len = max(map(len,sents_padded))
     not_the_longest = [s for s in sents_padded if len(s) < longest_len]
     for s in not_the_longest :
-        while(len(s) != longest_len) :
-            s.append(pad_token)
+        #while(len(s) != longest_len) :
+            #s.append(pad_token)
+        padded_num = longest_len - len(s)
+        s.extend([pad_token] * padded_num)
     ### END YOUR CODE
 
     return sents_padded

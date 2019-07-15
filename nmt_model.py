@@ -323,9 +323,10 @@ class NMT(nn.Module):
         ###         https://pytorch.org/docs/stable/torch.html#torch.squeeze
         dec_state = self.decoder(Ybar_t,dec_state)
         dec_hidden = dec_state[0]
-        unsqueezed_dec_hidden = torch.unsqueeze(dec_hidden,1)
-        permuted_enc_hiddens_proj = enc_hiddens_proj.permute(0,2,1)
-        e_t = torch.squeeze(torch.bmm(unsqueezed_dec_hidden,permuted_enc_hiddens_proj),1)
+        #unsqueezed_dec_hidden = torch.unsqueeze(dec_hidden,1)
+        #permuted_enc_hiddens_proj = enc_hiddens_proj.permute(0,2,1)
+        #e_t = torch.squeeze(torch.bmm(unsqueezed_dec_hidden,permuted_enc_hiddens_proj),1)
+        e_t = enc_hiddens_proj.bmm(dec_hidden.unsqueeze(2)).squeeze(2)
         
 
         ### END YOUR CODE
